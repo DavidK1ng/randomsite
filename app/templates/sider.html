@@ -1,0 +1,29 @@
+<div class="container-fluid" id="sidebar">
+    <br>
+    <div class="col-md-7" style="padding:0px;">
+        <form class="input-group">
+            <input type="text" class="form-control" placeholder="Búsqueda" id="search" name="search">
+        </form>
+        <br>
+        <h5>Entrades més recents</h5>
+        <ul style="padding:0px; list-style-type:none;">
+            {% for post in current_post %}
+                <li>
+                <a href="{{ url_for('post_detail',postname=post.title)}}" style="color:#666666; font-size:12.5px;">{{post.title}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <h5>Libro Little Hope Book Gratuito</h5>
+        <br>
+        <a href="/static/01_Y1_LHB_ONLINE_LOW.pdf" style="color:#666666; font-size:12.5px;">Descarga la versión digital de Little Hope Book escrito por nuestros maestros internacionales y nacionales DESCARGAR</a>
+    </div>
+</div>
+<style>
+    h5 {
+        font-size:15px;
+        font-weight:bold;
+    }
+    p {
+        font-size:13px;
+    }
+</style>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock title%}
+{% block content %}
+<br>
+<div class="container">
+    {% if post.cover %}
+    <img class="img-fluid" src="/{{ post.cover }}">
+    {% endif %}
+    <br>
+    <div id="text-area" style="padding-top:20px;"> 
+        <h4>{{ post.title }}</h4>
+        <p style="font-size: 12px;">Publicado el {{ post.timestamp }}, 2019 por yogaone</p>
+        <br>
+        <p>{{ post.body|safe }}</p>
+    </div>
+</div>
+{% endblock content %}

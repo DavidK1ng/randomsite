@@ -1,0 +1,59 @@
+<div id="nav" class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <nav class="navbar navbar-expand-sm " style="color: #000000; background-color: #000000;">
+                <a href="{{ url_for('index') }}" class="navbar-brand ">
+                    <img src="/static/img/logo-yogaone-white.png" class="d-inline-block align-top" alt="" loading="lazy">
+                </a>
+              
+                <div class="collapse navbar-collapse"  >
+                  <ul class="navbar-nav mr-auto" >
+                    <li class="nav-item active">
+                      <a class="nav-link" href="{{ url_for('index') }}">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('yoga')}}">Yoga</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('eventos')}}">{% if en %}Events{% else %}Eventos{% endif %}</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('meditacion')}}">{% if en %}Meditation{% else %}Meditación{% endif %}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('mindfulness')}}" class="nav-link">Mindfulness</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('yogis')}}" class="nav-link">Yogis</a>
+                    </li>
+                    {% if en %}
+                    <li class="nav-item" style="vertical-align: middle;">
+                      <a href="{{ url_for('index')}}" class="nav-link"><img src="/static/img/en.png" alt="" class="img-fluid" style="vertical-align:middle;" ></a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item" style="vertical-align: middle;">
+                        <a href="{{ url_for('en')}}" class="nav-link"><img src="/static/img/es.png" alt="" class="img-fluid" style="vertical-align:middle;" ></a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+</div>
+
+<style>
+    #nav {
+        background-color: #000000;
+    }
+    nav a{
+        color: aliceblue;
+    }
+    .navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+</style>

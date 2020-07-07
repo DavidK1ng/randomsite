@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <div id="post-list">
+        <ul style="padding:0px; list-style-type:none;">
+            {% if posts %}
+                {% for post in posts %}
+                    <li style="padding-bottom:40px;">
+                        {% if post.cover %}
+                        <img src="/{{ post.cover }}" class="img-fluid" alt="{{post.title}}">
+                        {% endif %}
+                        <br>
+                        <div id="post-brief" style="padding-top:20px;padding-right:20px;">
+                            <h4>{{ post.title }}</h4>
+                            {% if en %}
+                            <p style="font-size: 12px;">Posted on {{ post.timestamp }}, by yogaone</p>
+                            {% else %}
+                            <p style="font-size: 12px;">Publicado el {{ post.timestamp }}, por yogaone</p>
+                            {% endif %}
+                            <br>
+                            <div id="text-area" style="font-size:12px;font-family:'Monsterrat'">
+                            {{ post.body|striptags|truncate(300) }} [...]
+                            </div>
+                            <br>
+                            <a href="{{ url_for('post_detail',postname=post.title)}}" class="btn btn-sm float-right" style="background-color:#000000; color:#FFFFFF; font-size:12px;">{% if en %}Continue reading{% else %}Leer más{% endif %}</a>
+                        </div>
+                    </li>
+                    <hr>
+                {% endfor %}
+            {% else %}
+                <h4>No se encuentra ningún resultado</h4>
+                <br>
+                <p>Lo sentimos, pero nada coincide con tus términos de búsqueda. Por favor, Inténtalo de nuevo usando otros términos diferentes.</p>
+            {% endif%}
+        </ul>
+        <div id="paginator" class="float-right">
+            {% if paginate.has_prev %}
+                <a href="{{ url_for('index',page=paginate.prev_num)}}" class="btn btn-sm" style="background-color:#000000; color:#FFFFFF; font-size:12px;">« Anterior</a>
+            {% endif %}
+            {% for p in range(paginate.pages) %}
+                <a href="{{ url_for('index',page=p+1)}}" class="btn btn-sm" style="background-color:#000000; color:#FFFFFF; font-size:12px;">{{ p+1 }}</a>
+            {% endfor %}
+            {% if paginate.has_next %}
+                <a href="{{ url_for('index',page=paginate.next_num)}}" class="btn btn-sm" style="background-color:#000000; color:#FFFFFF; font-size:12px;">Siguiente »</a>
+            {% endif %}
+        </div>
+
+    </div>
+<style>
+
+    p {
+        font-family:"Monsterrat";
+    }
+</style>
+{% endblock content %}
+

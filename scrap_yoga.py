@@ -20,7 +20,7 @@ u = User.query.get(1)
 
 
 
-def get_single_page(inputurl):
+def get_single_page(inputurl,en):
     page = req.get(inputurl, headers=head).text
     bs_ = bs(page,"lxml")
 
@@ -66,8 +66,20 @@ def get_single_page(inputurl):
 
     u = User.query.get(1)
 
-    p = Post(title=title,body=md,timestamp=date,author=u,cover=img_path,category=c)
+    print(f'is_en value is: {en}')
+
+    if Post.query.filter_by(title=title).first():
+        p = Post.query.filter_by(title=title).first()
+        p.title=title
+        p.body=md
+        p.timestamp=date
+        p.cover=img_path
+        p.category= c
+        p.is_en=en
+    else:
+        p = Post(title=title,body=md,timestamp=date,author=u,cover=img_path,category=c,is_en=en)
     
+
     db.session.add(p)
 
     db.session.commit()
@@ -98,6 +110,8 @@ def get_post_urls(inputurl,post_urls):
 
 
 def mainsite():
+    site = "https://www.yogaone.es/blog/"
+    en = False
 
     post_urls = []
 
@@ -116,12 +130,39 @@ def mainsite():
 
     for p in post_urls:
         print("INTO POST "+p)
-        get_single_page(p)
+        print(en)
+        get_single_page(p,en)
     
-    print("ALL FINISHED")
+    print("ALL ES SITES FINISHED")
 
 
 
+
+    site = "https://www.yogaone.es/blog/en/"
+    en = True
+
+    post_urls = []
+
+    page_count = 1
+
+    while True:
+        url = "{}page/{}/".format(site,page_count)
+
+        isExist = get_post_urls(url,post_urls)
+
+        if isExist:
+            page_count += 1
+        else:
+            break
+    print(post_urls)
+
+    for p in post_urls:
+        print("INTO POST "+p)
+        print(en)
+        get_single_page(p,en)
+    
+    print("ALL EN SITES FINISHED")
+#mainsite()
 mainsite()
 
     #single_page(site+"introduccion-al-yoga-todo-lo-que-necesitas-saber/")
