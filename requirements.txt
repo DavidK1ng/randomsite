@@ -34,7 +34,7 @@ soupsieve==2.0.1
 SQLAlchemy==1.3.4
 tomd==0.1.3
 tool-yy==0.1.9
-urllib3==1.24.1
+urllib3==1.26.5
 uWSGI==2.0.19.1
 Werkzeug==0.15.2
 WTForms==2.2.1
